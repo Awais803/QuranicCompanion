@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quranic Companion - Islamic Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #f59e0b;
+            --text-color: #333;
+            --light-bg: #f8fafc;
+            --dark-bg: #1e293b;
+            --white: #ffffff;
+            --gold: #d4af37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            position: relative;
+            min-height: 100vh;
+            background-image: url('islamic-pattern.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-blend-mode: overlay;
+            background-color: rgba(248, 250, 252, 0.9);
+        }
+
+        .arabic {
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo-text span {
+            color: var(--secondary-color);
+        }
+
+        .menu-btn {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .feature-card p {
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: var(--primary-color);
+            color: var(--white);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Menu Overlay */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: none;
+            justify-content: flex-end;
+        }
+
+        .menu-content {
+            width: 300px;
+            height: 100%;
+            background-color: var(--white);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .close-menu {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .menu-option {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        /* Help Center Modal */
+        .help-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1001;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .help-content {
+            background-color: var(--white);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 12px;
+            padding: 30px;
+            position: relative;
+        }
+
+        .close-help {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .help-content h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #1c3d78;
+        }
+
+        .success-message {
+            text-align: center;
+            display: none;
+        }
+
+        .success-message i {
+            font-size: 4rem;
+            color: #10b981;
+            margin-bottom: 20px;
+            animation: bounce 1s;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-30px);}
+            60% {transform: translateY(-15px);}
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="logo.png" alt="Quranic Companion Logo">
+                <div class="logo-text">Quranic<span>Companion</span></div>
+            </div>
+            <div class="menu-btn" id="menuBtn">
+                <i class="fas fa-ellipsis-v"></i>
+            </div>
+        </header>
+
+        <section class="hero">
+            <h1 class="arabic">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</h1>
+            <h1>Your Complete Islamic Companion</h1>
+            <p>Access Quran, Duas, Tafsir, Islamic Rules and more in a beautifully designed modern interface</p>
+        </section>
+
+        <div class="features-grid">
+            <div class="feature-card" onclick="openFeature('duas')">
+                <div class="feature-icon">
+                    <i class="fas fa-hands-praying"></i>
+                </div>
+                <h3>Duas Collection</h3>
+                <p>Comprehensive collection of authentic Islamic supplications for all occasions</p>
+            </div>
+
+            <div class="feature-card" onclick="openFeature('translation')">
+                <div class="feature-icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                <h3>Quran Translation</h3>
+                <p>Multiple translations of the Holy Quran in various languages</p>
+            </div>
+
+            <div class="feature-card" onclick="openFeature('tafsir')">
+                <div class="feature-icon">
+                    <i class="fas fa-book-quran"></i>
+                </div>
+                <h3>Tafsir</h3>
+                <p>Detailed explanations and interpretations of Quranic verses</p>
+            </div>
+
+            <div class="feature-card" onclick="openFeature('rules')">
+                <div class="feature-icon">
+                    <i class="fas fa-scale-balanced"></i>
+                </div>
+                <h3>Islamic Rules</h3>
+                <p>Guidance on Islamic jurisprudence and daily practices</p>
+            </div>
+
+            <div class="feature-card" onclick="openFeature('prayer')">
+                <div class="feature-icon">
+                    <i class="fas fa-mosque"></i>
+                </div>
+                <h3>Prayer Times</h3>
+                <p>Accurate prayer times based on your location</p>
+            </div>
+
+            <div class="feature-card" onclick="openFeature('stories')">
+                <div class="feature-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3>Islamic Stories</h3>
+                <p>Inspiring stories from the lives of prophets and righteous people</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 All Rights Reserved. Developed by Awais Mehmood</p>
+    </footer>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-content">
+            <div class="menu-header">
+                <h3>Menu</h3>
+                <div class="close-menu" id="closeMenu">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            
+            <div class="menu-option" id="helpCenter">
+                <i class="fas fa-question-circle"></i> Help Center
+            </div>
+            <div class="menu-option">
+                <i class="fas fa-search"></i> Search
+            </div>
+            <div class="menu-option">
+                <i class="fas fa-palette"></i> Theme
+            </div>
+            <div class="menu-option">
+                <i class="fas fa-check-circle"></i> Done
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Center Modal -->
+    <div class="help-modal" id="helpModal">
+        <div class="help-content">
+            <div class="close-help" id="closeHelp">
+                <i class="fas fa-times"></i>
+            </div>
+            
+            <div id="helpForm">
+                <h2>Help Center</h2>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="surname">Surname</label>
+                    <input type="text" id="surname" placeholder="Enter your surname">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="Enter your phone number">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="message">How can we help you?</label>
+                    <textarea id="message" placeholder="Describe your issue or question"></textarea>
+                </div>
+                <button class="submit-btn" id="submitHelp">Submit</button>
+            </div>
+            
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i>
+                <h3>Thank You!</h3>
+                <p>We have received your message and will get back to you soon.</p>
+                <p>JazakAllah Khair for your patience.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Menu functionality
+        const menuBtn = document.getElementById('menuBtn');
+        const menuOverlay = document.getElementById('menuOverlay');
+        const closeMenu = document.getElementById('closeMenu');
+        const helpCenter = document.getElementById('helpCenter');
+        const helpModal = document.getElementById('helpModal');
+        const closeHelp = document.getElementById('closeHelp');
+        const submitHelp = document.getElementById('submitHelp');
+        const helpForm = document.getElementById('helpForm');
+        const successMessage = document.getElementById('successMessage');
+
+        menuBtn.addEventListener('click', () => {
+            menuOverlay.style.display = 'flex';
+        });
+
+        closeMenu.addEventListener('click', () => {
+            menuOverlay.style.display = 'none';
+        });
+
+        helpCenter.addEventListener('click', () => {
+            menuOverlay.style.display = 'none';
+            helpModal.style.display = 'flex';
+        });
+
+        closeHelp.addEventListener('click', () => {
+            helpModal.style.display = 'none';
+        });
+
+        submitHelp.addEventListener('click', () => {
+            // In a real app, you would send this data to your server/email
+            const name = document.getElementById('name').value;
+            const surname = document.getElementById('surname').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Here you would typically send this data to awaismehmood970@gmail.com
+            // For demo purposes, we'll just show the success message
+            helpForm.style.display = 'none';
+            successMessage.style.display = 'block';
+            
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                helpModal.style.display = 'none';
+                helpForm.style.display = 'block';
+                successMessage.style.display = 'none';
+                document.getElementById('name').value = '';
+                document.getElementById('surname').value = '';
+                document.getElementById('phone').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('message').value = '';
+            }, 3000);
+        });
+
+        function openFeature(feature) {
+            alert(`Opening ${feature} section. This will be implemented with actual content.`);
+            // In a real app, this would navigate to the appropriate section
+        }
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === menuOverlay) {
+                menuOverlay.style.display = 'none';
+            }
+            if (e.target === helpModal) {
+                helpModal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
